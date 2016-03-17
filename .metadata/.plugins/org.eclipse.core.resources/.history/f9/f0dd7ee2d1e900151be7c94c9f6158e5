@@ -1,0 +1,14 @@
+package model;
+
+import java.sql.SQLException;
+
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
+// Working Methods here declaration 
+// DAOStudent is for definition
+
+public interface StudentDAO {
+	public int addInDB(Student student) throws SQLException;
+	public List<Student> getStudents(Student student)throws SQLException;
+}
+

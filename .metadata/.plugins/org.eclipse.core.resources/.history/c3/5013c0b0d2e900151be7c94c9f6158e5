@@ -1,0 +1,63 @@
+package model.msqlDaoFactory;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.mysql.jdbc.Statement;
+
+import java.sql.Connection;
+
+import model.Student;
+import model.StudentDAO;
+
+/*
+ * 	DAOFactory -> MySQLDAOFactory -> MysqlDAOStudent 
+ */
+
+public class MySQLDAOStudent implements StudentDAO {
+	
+	@Override
+	public int addInDB(Student student) throws SQLException {
+		Connection connection = MysqlConnection.getConnection();
+	
+		PreparedStatement statement = (PreparedStatement) connection
+				.prepareStatement("insert into "
+						+ "student(username , password) values (?,?)");
+
+		statement.setString(1, student.getUsername());
+		statement.setString(2, student.getPassword());
+
+		int upadeted = statement.executeUpdate();
+
+		statement.close();
+
+		return upadeted;
+	}
+
+	@Override
+	public List<Student> getStudents(Student student) throws SQLException {
+		
+		Connection connection = MysqlConnection.getConnection();
+		
+		Statement statement = (Statement) connection
+				.createStatement();
+		ResultSet resultSet = statement.executeQuery("select username, "
+				+ "password from "
+				+ "student");
+		
+		while (resultSet.next()) {
+			String name = resultSet.getString("username");
+			String password = resultSet.getString("password");
+
+			User user = new User(id, name, password);
+			users.add(user);
+		}
+		
+
+		statement.close();
+		return 0;
+	}
+
+}	

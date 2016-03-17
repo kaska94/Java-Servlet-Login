@@ -1,0 +1,8 @@
+package controller;
+
+import model.Student;
+
+public interface Validaiton {
+	public boolean validate(String data);
+	public boolean doesExist(Student student);
+}

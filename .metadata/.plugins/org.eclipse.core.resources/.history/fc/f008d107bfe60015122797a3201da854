@@ -1,0 +1,16 @@
+package controller;
+
+import model.msqlDaoFactory.MySQLDAOStudent;
+
+public class Controller {
+	private MySQLDAOStudent factoryStudents;
+
+	public Controller(){
+		factoryStudents = new MySQLDAOStudent();
+	}
+	
+	public void loginPerformed(Strunde student)
+	{
+		
+	}
+}

@@ -1,0 +1,6 @@
+package controller;
+
+public interface Validaiton {
+	public boolean validate(String data);
+	public boolean comparePasswords(String password, String passwordsec);
+}

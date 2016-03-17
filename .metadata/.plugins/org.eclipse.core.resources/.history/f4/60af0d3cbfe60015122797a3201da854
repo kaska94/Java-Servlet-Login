@@ -1,0 +1,26 @@
+package controller;
+
+import java.sql.SQLException;
+
+import model.Student;
+import model.msqlDaoFactory.MySQLDAOStudent;
+
+public class Controller {
+	private MySQLDAOStudent factoryStudents;
+
+	public Controller(){
+		factoryStudents = new MySQLDAOStudent();
+	}
+	
+	public int loginPerformed(Student student)
+	{
+		try {
+			int result = factoryStudents.addInDB(student);
+			return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+}

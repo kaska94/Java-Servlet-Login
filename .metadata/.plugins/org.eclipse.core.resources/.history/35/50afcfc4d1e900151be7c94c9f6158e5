@@ -1,0 +1,53 @@
+package model.msqlDaoFactory;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Connection;
+
+import model.Student;
+import model.StudentDAO;
+
+/*
+ * 	DAOFactory -> MySQLDAOFactory -> MysqlDAOStudent 
+ */
+
+public class MySQLDAOStudent implements StudentDAO {
+	
+	@Override
+	public int addInDB(Student student) throws SQLException {
+		Connection connection = MysqlConnection.getConnection();
+	
+		PreparedStatement statement = (PreparedStatement) connection
+				.prepareStatement("insert into "
+						+ "student(username , password) values (?,?)");
+
+		statement.setString(1, student.getUsername());
+		statement.setString(2, student.getPassword());
+
+		int upadeted = statement.executeUpdate();
+
+		statement.close();
+
+		return upadeted;
+	}
+
+	@Override
+	public int getStudentFromDB(Student student) throws SQLException {
+		int result = -1;
+		
+		Connection connection = MysqlConnection.getConnection();
+		
+		PreparedStatement statement = (PreparedStatement) connection
+				.prepareStatement("insert into "
+						+ "student(username , password) values (?,?)");
+
+		statement.setString(1, student.getUsername());
+		statement.setString(2, student.getPassword());
+
+		int upadeted = statement.executeUpdate();
+
+		statement.close();
+		return 0;
+	}
+
+}

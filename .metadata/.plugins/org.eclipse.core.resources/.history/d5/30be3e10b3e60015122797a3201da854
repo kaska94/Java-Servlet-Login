@@ -1,0 +1,8 @@
+package model;
+
+// Working Methods here declaration 
+// DAOStudent is for definition
+
+public interface StudentDAO {
+	public int addInDB(Student student);
+}

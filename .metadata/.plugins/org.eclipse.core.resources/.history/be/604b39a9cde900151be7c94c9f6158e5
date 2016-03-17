@@ -1,0 +1,56 @@
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.Student;
+import model.msqlDaoFactory.MysqlConnection;
+
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet implements Validaiton {
+	private static final long serialVersionUID = 1L;
+	private Controller control;
+	public LoginServlet() {
+		super();
+		MysqlConnection.getInstance();
+		MysqlConnection.connect();
+		control = new Controller();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter writer = response.getWriter();
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		if (validate(username) && validate(password)) {
+			Student student = new Student(username, password);
+			if(control.loginPerformed(student) > 0)
+			{
+				writer.println("Added Student");
+			}
+		} else {
+			response.sendRedirect("http://localhost:8080/Site/FailLog.html");
+		}
+
+	}
+
+	@Override
+	public boolean validate(String data) {
+		if ((data == null) || (data == "")) {
+			return false;
+		}
+		return true;
+	}
+
+}
