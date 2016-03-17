@@ -31,7 +31,7 @@
     -->
     <Resource name="jdbc/student" auth="Container" type="javax.sql.DataSource"
                maxActive="100" maxIdle="30" maxWait="10000"
-               username="root" password="parolata" driverClassName="com.mysql.jdbc.Driver"
+               username="" password="" driverClassName="com.mysql.jdbc.Driver"
                url="jdbc:mysql://localhost:3306/student?useSSL=false&amp;autoReconnect=true"/>
 
 </Context>
